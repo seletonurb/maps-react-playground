@@ -1,0 +1,18 @@
+[
+    {
+        "origin": {
+            "longitude": 2.3439118999999664,
+            "latitude": 48.848672,
+            "address": "17 Rue de la Sorbonne, 75005 Paris, France"
+        },
+        "destination": {
+            "longitude": 2.3456802000000607,
+            "latitude": 48.84695429999999,
+            "address": "75005 Paris, France"
+        },
+        "_id": "5eab1b60-ca70-11e8-ac1c-97676af5dd97",
+        "meansOfTransportation": "WALKING",
+        "timestampStart": null,
+        "__v": 0
+    }
+]

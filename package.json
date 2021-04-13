@@ -1,0 +1,51 @@
+{
+  "name": "maps-react-playground",
+  "version": "0.0.1",
+  "private": true,
+  "devDependencies": {
+    "cross-env": "^7.0.2",
+    "react-app-rewired": "^2.1.6",
+    "react-scripts": "^3.4.1"
+  },
+  "dependencies": {
+    "bootstrap": "^4.6.0",
+    "connected-react-router": "^6.9.1",
+    "font-awesome": "^4.7.0",
+    "google-map-react": "^2.1.9",
+    "history": "^4.10.1",
+    "leaflet": "^1.7.1",
+    "mapbox-gl": "^2.2.0",
+    "marked": "^2.0.1",
+    "node-sass": "^4.14.1",
+    "prop-types": "^15.7.2",
+    "react": "^17.0.2",
+    "react-bootstrap": "^1.5.2",
+    "react-dom": "^17.0.2",
+    "react-leaflet": "^3.1.0",
+    "react-redux": "^7.2.3",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
+    "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-thunk": "^2.3.0",
+    "uuid": "^3.4.0"
+  },
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "cross-env PORT=3000 react-app-rewired test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

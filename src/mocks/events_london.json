@@ -1,0 +1,72 @@
+[
+    {
+        "_id": "d653a39a-3c4b-4f7c-b800-cabed6a77b09",
+        "name": "Westminster Abbey",
+        "latitude": 51.49936950000001,
+        "longitude": -0.1272993,
+        "address": "20 Deans Yd, Westminster, London SW1P 3PA, UK"
+    },
+    {
+        "_id": "a8301eef-61e4-49d9-b3f8-c477648a48e0",
+        "name": "South Bank",
+        "latitude": 51.503728,
+        "longitude": -0.1116764,
+        "address": "South Bank, London, UK"
+    },
+    {
+        "_id": "b62b344f-2232-4518-acaf-0211765b04da",
+        "name": "Tower Bridge",
+        "latitude": 51.5054564,
+        "longitude": -0.07535649999999999,
+        "address": "Tower Bridge Rd, London SE1 2UP, UK"
+    },
+    {
+        "_id": "cee8cb61-94ae-4160-9fde-0ee73068d24f",
+        "name": "Tower Hill",
+        "latitude": 51.5095614,
+        "longitude": -0.07616959999999999,
+        "address": "Tower Hill, London, UK"
+    },
+    {
+        "_id": "b9c5a028-73da-4aa9-bb63-c152f5322f67",
+        "name": "St. Paul's Cathedral",
+        "latitude": 51.51384530000001,
+        "longitude": -0.0983506,
+        "address": "St. Paul's Churchyard, London EC4M 8AD, UK"
+    },
+    {
+        "_id": "584077e6-2294-4048-b986-59d690e1a19f",
+        "name": "Tate Modern",
+        "latitude": 51.50759530000001,
+        "longitude": -0.09935640000000001,
+        "address": "Bankside, London SE1 9TG, UK"
+    },
+    {
+        "_id": "f48740a8-d63d-43d2-a912-b42af80e59f6",
+        "name": "The British Museum",
+        "latitude": 51.5194133,
+        "longitude": -0.1269566,
+        "address": "Great Russell St, Bloomsbury, London WC1B 3DG, UK"
+    },
+    {
+        "_id": "c4d3e4da-2637-45d5-a4e9-56f035c6ec7a",
+        "name": "Notting Hill",
+        "latitude": 51.5160125,
+        "longitude": -0.2090148,
+        "address": "Notting Hill, London, UK"
+    },
+    {
+        "_id": "ab47fad9-1c8a-44ac-9feb-0c682ecf0fa5",
+        "name": "Buckingham Palace",
+        "latitude": 51.501364,
+        "longitude": -0.14189,
+        "address": "Westminster, London SW1A 1AA, UK"
+    },
+    {
+        "_id": "2192483a-9dc0-41ff-a3ac-6b932a1ee492",
+        "name": "Downing Street",
+        "latitude": 51.5032437,
+        "longitude": -0.1275898,
+        "address": "Downing St, Westminster, London SW1A, UK"
+    }
+]

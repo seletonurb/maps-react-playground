@@ -1,0 +1,45 @@
+[
+    {
+        "_id": "5ea30511-ca70-11e8-ac1c-97676af5dd97",
+        "timestampStart": 34200000,
+        "latitude": 48.8605007,
+        "longitude": 2.3254166000000396,
+        "name": "Musée d'Orsay",
+        "address": "75007 Paris, France"
+    },
+    {
+        "_id": "17a63357-8ec3-49c7-8dde-d117667a8c5a",
+        "name": "Eiffel Tower",
+        "latitude": 48.8560934,
+        "longitude": 2.2930458,
+        "address": "Eiffel Tower, Paris, France"
+    },
+    {
+        "_id": "95e5f94d-bd54-483e-a776-9b6e170a0917",
+        "name": "Montmartre",
+        "latitude": 48.8867148,
+        "longitude": 2.3388895,
+        "address": "Montmartre, 75018 Paris, France"
+    },
+    {
+        "_id": "9aad74db-30db-41ba-a7b3-a843daa8a7b4",
+        "name": "Bastille",
+        "latitude": 48.8513077,
+        "longitude": 2.3761586,
+        "address": "Bastille, Paris, France"
+    },
+    {
+        "_id": "284e2fe0-0d9f-44ec-bfd7-2b729cb55ee2",
+        "name": "Luxembourg Gardens",
+        "latitude": 48.8462217,
+        "longitude": 2.3371605,
+        "address": "75006 Paris, France"
+    },
+    {
+        "_id": "c97a6301-1bcd-4cdc-98f6-7c507d3cc106",
+        "name": "Louvre Museum",
+        "latitude": 48.8606111,
+        "longitude": 2.337644,
+        "address": "Rue de Rivoli, 75001 Paris, France"
+    }
+]
