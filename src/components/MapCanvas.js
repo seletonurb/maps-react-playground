@@ -4,19 +4,21 @@ import GoogleMapReact from 'google-map-react';
 import MarkerFactory from '../services/MarkerFactory';
 import { GOOGLE_MAPS_API_KEY } from '../appConfiguration';
 import {
-  zoomToIncludeMarkers,
+  zoomToIncludeMarkers
 } from '../utils/googleAPIUtils';
 import { generateTimestampId } from '../utils/common';
 
 const { DEFAULT_MAP_DESTINATION } = CONSTANTS;
 
-const MapCanvas = ({ children, positions, selectedMarkerId, onMapsLoaded, props }) => {
+const MapCanvas = ({
+  children, positions, selectedMarkerId, onMapsLoaded, props
+}) => {
   const [map, setMap] = useState(null);
   const [maps, setMaps] = useState(null);
   const [markersArray, setMarkersArray] = useState([]);
 
   const addMarkerToMap = (maps, map, latitude, longitude, textLabel, markerId, markerType) => {
-    const id = markerId ? markerId : generateTimestampId(); // if id does not exist, generates a random marker id based on a timestamp
+    const id = markerId || generateTimestampId(); // if id does not exist, generates a random marker id based on a timestamp
     const marker = MarkerFactory.buildMarkerMap(maps, map, latitude, longitude, textLabel, id, markerType);
     return marker;
   };
@@ -25,7 +27,9 @@ const MapCanvas = ({ children, positions, selectedMarkerId, onMapsLoaded, props 
     const updatedMarkersArray = [...markersArray];
     MarkerFactory.clearMarkers(updatedMarkersArray); // clear map markers if they exist
     (positions || []).forEach(function (position, index) {
-      const { latitude, longitude, textLabel, id } = position;
+      const {
+        latitude, longitude, textLabel, id
+      } = position;
       const marker = addMarkerToMap(maps, map, latitude, longitude, textLabel || index + 1, id);
       updatedMarkersArray.push(marker);
     });
@@ -48,7 +52,6 @@ const MapCanvas = ({ children, positions, selectedMarkerId, onMapsLoaded, props 
 
   const selectedMarker = useRef(null);
   useEffect(() => {
-
     // marker is already selected
     if (selectedMarker.current === selectedMarkerId) {
       return;
@@ -70,7 +73,6 @@ const MapCanvas = ({ children, positions, selectedMarkerId, onMapsLoaded, props 
   }, [selectedMarkerId, markersArray]);
 
   const searchMarkerId = useRef(undefined);
-
 
   const initializeMaps = (map, maps) => {
     setMap(map);

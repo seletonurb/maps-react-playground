@@ -15,7 +15,7 @@ const DAY = 24 * HOUR; // 24 * 1 hour = 1 day
 CONSTANTS.TIME = {
   MINUTE,
   HOUR,
-  DAY,
+  DAY
 };
 
 export default CONSTANTS;

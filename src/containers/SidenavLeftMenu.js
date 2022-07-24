@@ -1,11 +1,11 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import ItineraryView from './ItineraryView'
+import ItineraryView from './ItineraryView';
 import { useLocation } from 'react-router';
 import { Tabs, Tab } from 'react-bootstrap';
 import { updateHash } from '../utils/common';
 import { setItineraryEvents, setGeofences, setCurrentTab } from '../actions/common';
-import CONSTANTS from '../constants/constants'
+import CONSTANTS from '../constants/constants';
 import GeofencesView from './GeofencesView';
 import CostsView from './CostsView';
 
@@ -16,9 +16,8 @@ const SidenavLeftMenu = ({
   itineraryEvents,
   geofences,
   setSearchPlace,
-  maps,
+  maps
 }) => {
-
   const location = useLocation();
 
   // Wrap with useCallback to avoid change on every render. It returns a memoized version of the callback that only changes if one of the provided dependencies change.
@@ -38,7 +37,6 @@ const SidenavLeftMenu = ({
   useEffect(() => {
     const tabName = getTabNameFromHash();
     setKey(tabName);
-
   }, [getTabNameFromHash]);
 
   useEffect(() => {
@@ -68,21 +66,18 @@ const SidenavLeftMenu = ({
     }
   ];
 
-
-
   const getTabContent = (tabKey) => {
     switch (tabKey) {
       case 'tab-itinerary':
-        return <ItineraryView setSearchPlace={setSearchPlace} maps={maps} />
+        return <ItineraryView setSearchPlace={setSearchPlace} maps={maps} />;
       case 'tab-geofences':
-        return <GeofencesView />
+        return <GeofencesView />;
       case 'tab-costs':
-        return <CostsView />
+        return <CostsView />;
       default:
         return null;
     }
-  }
-
+  };
 
   return (
     <div className="container padding-10">
@@ -103,22 +98,19 @@ const SidenavLeftMenu = ({
       </div>
     </div>
 
-
   );
 };
 
 const mapStateToProps = state => ({
   inProgress: state.itinerary.inProgress,
   itineraryEvents: state.itinerary.itineraryEvents,
-  geofences: state.geofence.geofences,
+  geofences: state.geofence.geofences
 });
 
 const mapDispatchToProps = dispatch => ({
   setItineraryEvents: (queryEvents) => dispatch(setItineraryEvents(queryEvents)),
   setGeofences: (geofences) => dispatch(setGeofences(geofences)),
-  setCurrentTab: (currentTab) => dispatch(setCurrentTab(currentTab)),
+  setCurrentTab: (currentTab) => dispatch(setCurrentTab(currentTab))
 });
-
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(SidenavLeftMenu);

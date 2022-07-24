@@ -12,5 +12,4 @@ const MapsViewPage = () => {
   );
 };
 
-
 export default MapsViewPage;

@@ -23,7 +23,7 @@ const MapsViewContainer = ({
             searchPlace={searchPlace}
             onMapsLoaded={onMapsLoaded}
           ></MapContainerGoogle>
-        )
+        );
 
       case 'leaftlet':
 
@@ -32,7 +32,7 @@ const MapsViewContainer = ({
             searchPlace={searchPlace}
             onMapsLoaded={onMapsLoaded}
           ></MapContainerLeaflet>
-        )
+        );
 
       case 'mapbox':
 
@@ -41,14 +41,14 @@ const MapsViewContainer = ({
             searchPlace={searchPlace}
             onMapsLoaded={onMapsLoaded}
           ></MapContainerMapbox>
-        )
+        );
 
       default:
         return (
           <>Map not found {mapsType}</>
         );
     }
-  }
+  };
 
   return (
     <div className="day-view">

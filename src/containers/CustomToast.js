@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 import { Toast } from 'react-bootstrap';
 import { hideToastMessage } from '../actions/common';
 
-const BootstrapToaster = ({ toastHeader, message, messageType, showToast, hideToastMessage }) => {
+const BootstrapToaster = ({
+  toastHeader, message, messageType, showToast, hideToastMessage
+}) => {
   const getClassName = messageType => {
     const classNamePrefix = 'toast-message';
 
@@ -30,11 +32,10 @@ const BootstrapToaster = ({ toastHeader, message, messageType, showToast, hideTo
 };
 
 const CustomToast = ({ callbackMessage, hideToastMessage }) => {
-
   const [showToast, setShowToast] = useState(!!callbackMessage.message);
 
   useEffect(() => {
-    setShowToast(callbackMessage.message ? true : false);
+    setShowToast(!!callbackMessage.message);
   }, [callbackMessage]);
 
   const { message, mtype: messageType } = callbackMessage;

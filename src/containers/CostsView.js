@@ -2,8 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 const CostsView = () => {
-
-    return (
+  return (
         <>
             <div className="row day-view-title">
                 Costs
@@ -14,7 +13,7 @@ const CostsView = () => {
                 </div>
             </div>
         </>
-    );
+  );
 };
 
 const mapStateToProps = state => ({});

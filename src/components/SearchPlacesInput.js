@@ -3,7 +3,6 @@ import { initAutocompleteSearchPlacesBox } from '../utils/googleAPIUtils';
 const SEARCH_PLACES_BOX_ID = 'pac-input';
 
 const SearchPlacesInput = ({ maps, onPlaceFound, onPlaceCleared }) => {
-
   useEffect(() => {
     if (maps) {
       const inputElement = document.getElementById(SEARCH_PLACES_BOX_ID);

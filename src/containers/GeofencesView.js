@@ -2,15 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 const GeofencesView = () => {
-
-    return (
+  return (
         <>
             <div className="row day-view-title">
                 Geofences
             </div>
 
         </>
-    );
+  );
 };
 
 const mapStateToProps = state => ({});

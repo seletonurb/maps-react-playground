@@ -34,7 +34,8 @@
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "cross-env PORT=3000 react-app-rewired test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "format": "eslint --fix"
   },
   "browserslist": {
     "production": [

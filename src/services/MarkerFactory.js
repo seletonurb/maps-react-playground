@@ -1,6 +1,6 @@
-/******************************
+/** ****************************
  * Marker Shape Definition
- *******************************/
+ ****************************** */
 const SVG_BALLOON_SHAPE = 'M0-48c-9.8 0-17.7 7.8-17.7 17.4 0 15.5 17.7 30.6 17.7 30.6s17.7-15.4 17.7-30.6c0-9.6-7.9-17.4-17.7-17.4z';
 const SVG_CIRCLE_SHAPE = 'M 0,0   m -15, 0  a 15,15 0 1,0 30,0  a 15,15 0 1,0 -30,0';
 const SVG_DEFAULT_SHAPE = SVG_BALLOON_SHAPE;
@@ -25,9 +25,9 @@ MarkerShape.prototype.getCircleShape = function () {
   return SVG_CIRCLE_SHAPE;
 };
 
-/******************************
+/** ****************************
  * Marker Definition
- *******************************/
+ ****************************** */
 
 const defaultMarkerProps = {
   path: new MarkerShape().getBalloonShape(),
@@ -67,9 +67,9 @@ Marker.prototype.setShiftLabel = function (value) {
   this.shiftLabel = value;
 };
 
-/******************************
+/** ****************************
  * Marker Factory
- *******************************/
+ ****************************** */
 
 const MarkerFactory = {};
 
@@ -102,7 +102,7 @@ MarkerFactory.buildMarkerMap = function (maps, map, latitude, longitude, textLab
   let marker;
   let loc;
 
-  markerType = markerType ? markerType : MarkerFactory.MARKER_TYPES.NORMAL;
+  markerType = markerType || MarkerFactory.MARKER_TYPES.NORMAL;
   if (markerType.shiftLabel) {
     markerType.labelOrigin = new maps.Point(0, -25);
   }

@@ -3,7 +3,6 @@ import Header from './Header';
 import CustomToast from '../containers/CustomToast';
 
 const OuterLayout = ({ children }) => {
-
   const containerClassname = 'main-container padding-top-navbar';
 
   return (

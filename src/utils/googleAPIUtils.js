@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-/********************************PLACES API********************************************* */
+/** ******************************PLACES API********************************************* */
 
 /* Parses a place object from Google API into an obejct with the following properties:
    {
@@ -51,9 +51,9 @@ export const initAutocompleteSearchPlacesBox = (inputElement, maps, callback) =>
   });
 };
 
-/******************************** END PLACES API********************************************* */
+/** ****************************** END PLACES API********************************************* */
 
-/********************************MAPS API********************************************* */
+/** ******************************MAPS API********************************************* */
 
 // Return map bounds based on list of places
 const getMapBounds = (maps, markers) => {
@@ -100,5 +100,4 @@ export const zoomToIncludeMarkers = (maps, map, markers = []) => {
   // special zoom if only one marker
   setZoomForOneMarker(markers, map);
 };
-/********************************ENDS MAPS API********************************************* */
-
+/** ******************************ENDS MAPS API********************************************* */

@@ -3,7 +3,7 @@ import {
   HIDE_TOAST,
   SET_CURRENT_TAB
 } from '../constants/actionTypes';
-import CONSTANTS from '../constants/constants'
+import CONSTANTS from '../constants/constants';
 const defaultState = {
   currentTab: CONSTANTS.DEFAULT_TAB_NAME,
   callbackMessage: {

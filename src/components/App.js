@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Route as ReactRouter, Switch, Redirect, useLocation } from 'react-router-dom';
+import {
+  Route as ReactRouter, Switch, Redirect, useLocation
+} from 'react-router-dom';
 import OuterLayout from './OuterLayout';
 import 'font-awesome/css/font-awesome.min.css';
 import ROUTES from '../constants/routes';
@@ -22,9 +24,8 @@ const Route = ({ path, component, exact }) => {
 };
 
 const App = () => {
-
   return (
-    <OuterLayout  >
+    <OuterLayout >
       <Switch>
         <Route exact path="/" component={() => <Redirect to="/maps/google" />} />
         <Route path="/maps/:mapsType" component={MapsViewPage} />
@@ -34,7 +35,6 @@ const App = () => {
     </OuterLayout>
 
   );
-
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

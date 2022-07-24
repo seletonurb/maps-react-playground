@@ -48,13 +48,12 @@ export const convertTimestampToHourOfTheDay = dateTimestamp => {
   return dateLabel;
 };
 
-
 /* Get Current Date in the format dd/mm/YYYY */
 export const getShortDateNow = () => {
   const today = new Date();
   const yyyy = today.getFullYear();
   let dd = today.getDate();
-  let mm = today.getMonth() + 1; //January is 0!
+  let mm = today.getMonth() + 1; // January is 0!
 
   if (dd < 10) {
     dd = `0${dd}`;
