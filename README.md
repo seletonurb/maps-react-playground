@@ -4,7 +4,8 @@ A proof of concept for clients connecting to different maps tools and APIs.
 Overview:
 - A SPA with one screen containing a fixed left side nav and a map
 - Ability to see a itinerary in the past hour
-- Ability to set geofences and check if an element is in/out of this geofence
+- [Not available] Ability to set geofences and check if an element is in/out of this geofence
+- [Not available] Cost breakdown of each request made to different APIs
 
 ## Setup
 
@@ -32,5 +33,5 @@ To get the app running locally:
 - `yarn start` to start the local server (this project uses create-react-app) or `yarn build` to build this project
 
 ## References
-- (Google Maps Javascript API)[https://developers.google.com/maps/documentation/javascript/overview]
-- (React Leaflet)[https://react-leaflet.js.org/docs/start-installation]
+- [Google Maps Javascript API(https://developers.google.com/maps/documentation/javascript/overview)
+- [React Leaflet](https://react-leaflet.js.org/docs/start-installation)

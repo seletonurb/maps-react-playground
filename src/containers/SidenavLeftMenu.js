@@ -7,6 +7,7 @@ import { updateHash } from '../utils/common';
 import { setItineraryEvents, setGeofences, setCurrentTab } from '../actions/common';
 import CONSTANTS from '../constants/constants'
 import GeofencesView from './GeofencesView';
+import CostsView from './CostsView';
 
 const SidenavLeftMenu = ({
   setItineraryEvents,
@@ -59,7 +60,13 @@ const SidenavLeftMenu = ({
       heading: 'Geofences',
       route: 'tab-geofences',
       display: true
-    }];
+    },
+    {
+      heading: 'Costs',
+      route: 'tab-costs',
+      display: true
+    }
+  ];
 
 
 
@@ -69,6 +76,8 @@ const SidenavLeftMenu = ({
         return <ItineraryView setSearchPlace={setSearchPlace} maps={maps} />
       case 'tab-geofences':
         return <GeofencesView />
+      case 'tab-costs':
+        return <CostsView />
       default:
         return null;
     }
