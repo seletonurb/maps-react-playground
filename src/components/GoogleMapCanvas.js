@@ -10,7 +10,7 @@ import { generateTimestampId } from '../utils/common';
 
 const { DEFAULT_MAP_DESTINATION } = CONSTANTS;
 
-const MapCanvas = ({
+const GoogleMapCanvas = ({
   children, positions, selectedMarkerId, onMapsLoaded, props
 }) => {
   const [map, setMap] = useState(null);
@@ -106,4 +106,4 @@ const MapCanvas = ({
   );
 };
 
-export default MapCanvas;
+export default GoogleMapCanvas;

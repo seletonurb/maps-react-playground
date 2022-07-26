@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import MapCanvas from '../components/MapCanvas';
+import GoogleMapCanvas from '../components/GoogleMapCanvas';
 import { initializeMapPositions } from '../utils/common';
 import CONSTANTS from '../constants/constants';
 
@@ -33,14 +33,14 @@ const GoogleMapContainer = ({
   }, [currentTab, itineraryEvents, geofences]);
 
   return (
-        <MapCanvas
-            id="map_canvas"
-            positions={mapPositions}
-            searchPlace={searchPlace}
-            selectedMarkerId={selectedMarkerId}
-            onMapsLoaded={onMapsLoaded}
-        >
-        </MapCanvas>
+    <GoogleMapCanvas
+      id="map_canvas"
+      positions={mapPositions}
+      searchPlace={searchPlace}
+      selectedMarkerId={selectedMarkerId}
+      onMapsLoaded={onMapsLoaded}
+    >
+    </GoogleMapCanvas>
   );
 };
 
