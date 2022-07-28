@@ -23,6 +23,7 @@ Link for project with API key: (GCP Project)[https://console.cloud.google.com/ho
 ## Environment variables
 
 `GOOGLE_MAPS_API_KEY`: Google Maps API key for Places, Directions and Map requests
+`MAPBOX_API_KEY`: Mapbox API key
 
 
 ## Getting started
@@ -33,5 +34,9 @@ To get the app running locally:
 - `yarn start` to start the local server (this project uses create-react-app) or `yarn build` to build this project
 
 ## References
-- [Google Maps Javascript API(https://developers.google.com/maps/documentation/javascript/overview)
+- [Google Maps Javascript API](https://developers.google.com/maps/documentation/javascript/overview)
+- [Google Map React](https://github.com/google-map-react/google-map-react#readme)
+- [Mapbox Docs](https://docs.mapbox.com/mapbox-gl-js)
+- [React Mapbox GL](https://github.com/visgl/react-map-gl/tree/master/examples)
+- [LeafletJS Docs](https://leafletjs.com/reference.html)
 - [React Leaflet](https://react-leaflet.js.org/docs/start-installation)

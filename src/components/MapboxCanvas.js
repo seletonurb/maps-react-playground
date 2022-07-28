@@ -3,76 +3,116 @@ import CONSTANTS from '../constants/constants';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import '../sass/mapbox.scss';
-import MarkerFactory from '../services/MarkerFactory';
+import ReactMapGL, { Marker } from 'react-map-gl';
 import { MAPBOX_API_KEY } from '../appConfiguration';
+import Pin from "./Pin";
+import {
+  zoomToIncludeMarkers
+} from '../utils/mapboxAPIUtils';
+
 
 const { DEFAULT_MAP_DESTINATION } = CONSTANTS;
 
-// Example token from https://github.com/mapbox/mapbox-react-examples
 mapboxgl.accessToken = MAPBOX_API_KEY;
-const mapboxApiKey = mapboxgl.accessToken
+const mapboxApiKey = MAPBOX_API_KEY
+
+const defaultViewport = {
+  latitude: DEFAULT_MAP_DESTINATION.CENTER[0],
+  longitude: DEFAULT_MAP_DESTINATION.CENTER[1],
+  zoom: DEFAULT_MAP_DESTINATION.ZOOM
+};
+const mapStyle = {
+  width: '100%',
+  height: '100%'
+}
+
+const CustomMarker = ({ index, latitude, longitude }) => {
+  return (
+
+    <Marker
+      key={`marker-${index}`}
+      longitude={longitude}
+      latitude={latitude}>
+      <div className="marker">
+        <span><b>{index + 1}</b></span>
+      </div>
+      <Pin size={20} />
+    </Marker>
+  )
+};
 
 const MapboxCanvas = ({
-  positions, selectedMarkerId
+  positions, selectedMarkerId, searchPlace
 }) => {
-  const mapContainerRef = useRef(null);
-
-  const [lng, setLng] = useState(CONSTANTS.DEFAULT_MAP_DESTINATION.CENTER[1]);
-  const [lat, setLat] = useState(CONSTANTS.DEFAULT_MAP_DESTINATION.CENTER[0]);
-  const [zoom, setZoom] = useState(CONSTANTS.DEFAULT_MAP_DESTINATION.ZOOM);
 
   const [mapboxMap, setMapboxMap] = useState(null);
-
-  // Initialize Mapbox when component mounts
-  useEffect(() => {
-    const map = new mapboxgl.Map({
-      container: mapContainerRef.current,
-      style: 'mapbox://styles/mapbox/streets-v11',
-      center: [lng, lat],
-      zoom: zoom
-    });
-
-    // Add navigation control (the +/- zoom buttons)
-    map.addControl(new mapboxgl.NavigationControl(), 'top-right');
-
-    map.on('move', () => {
-      setLng(map.getCenter().lng.toFixed(4));
-      setLat(map.getCenter().lat.toFixed(4));
-      setZoom(map.getZoom().toFixed(2));
-    });
-    setMapboxMap(mapboxMap)
-    // Clean up on unmount
-    return () => map.remove();
-  }, []);
+  const [viewport, setViewport] = useState(defaultViewport);
+  const [lng, setLng] = useState(defaultViewport.longitude);
+  const [lat, setLat] = useState(defaultViewport.latitude);
+  const [zoom, setZoom] = useState(defaultViewport.zoom);
 
   const [markersArray, setMarkersArray] = useState([]);
 
-  const addMarkerToMap = (latitude, longitude, textLabel, markerId, markerType) => {
-    // // Create a default Marker and add it to the map.
-    const marker1 = new mapboxgl.Marker()
-      .setLngLat([12.554729, 55.70651])
-      .addTo(mapboxMap);
-  };
+  useEffect(() => {
+    if (!mapboxMap) {
+      return
+    }
+    console.log(`Map initialized`)
 
-  const addMarkersToMap = (positions) => {
-    const updatedMarkersArray = [...markersArray];
-    MarkerFactory.clearMarkers(updatedMarkersArray); // clear map markers if they exist
-    (positions || []).forEach(function (position, index) {
-      const {
-        latitude, longitude, textLabel, id
-      } = position;
-      const marker = addMarkerToMap(latitude, longitude, textLabel || index + 1, id);
-      updatedMarkersArray.push(marker);
+    // Add navigation control (the +/- zoom buttons)
+    mapboxMap.addControl(new mapboxgl.NavigationControl(), 'top-right');
+
+    mapboxMap.on('move', () => {
+      setLng(mapboxMap.getCenter().lng.toFixed(4));
+      setLat(mapboxMap.getCenter().lat.toFixed(4));
+      setZoom(mapboxMap.getZoom().toFixed(2));
     });
+
+    // Clean up on unmount
+    //return () => mapboxMap.remove();
+  }, [mapboxMap]);
+
+  useEffect(() => {
+    console.log(`Viewport changed`)
+  }, [viewport]);
+
+  const addMarkerToMap = (latitude, longitude, markerId) => {
+    const marker = {
+      latitude,
+      longitude,
+      markerId
+    }
+    const updatedMarkersArray = [...markersArray, marker];
     setMarkersArray(updatedMarkersArray);
   };
 
+  const addMarkersToMap = (positions) => {
+    const newMarkersArray = [];
+
+    (positions || []).forEach(function (position) {
+      newMarkersArray.push(position);
+    });
+    setMarkersArray(newMarkersArray);
+  };
+
   useEffect(() => {
-    if (!(mapContainerRef.current) || !positions) {
-      return;
+    addMarkersToMap(positions);
+  }, [positions]);
+
+  useEffect(() => {
+    if (!mapboxMap) {
+      return
     }
-    //addMarkersToMap(positions);
-  }, [mapContainerRef.current, positions]);
+
+    zoomToIncludeMarkers(mapboxMap, markersArray);
+  }, [markersArray, mapboxMap]);
+
+  useEffect(() => {
+    if (!searchPlace) {
+      return
+    }
+    addMarkerToMap(searchPlace);
+  }, [searchPlace]);
 
   const selectedMarker = useRef(null);
   useEffect(() => {
@@ -80,20 +120,38 @@ const MapboxCanvas = ({
     if (selectedMarker.current === selectedMarkerId) {
       return;
     }
-    console.log(`New selected id: ${selectedMarkerId}`);
+    console.log(`New selected id: ${selectedMarkerId} `);
 
   }, [selectedMarkerId, markersArray]);
 
   return (
     <>
-      <div>
+      <ReactMapGL
+        mapboxApiAccessToken={mapboxApiKey}
+        initialViewState={viewport}
+        style={mapStyle}
+        mapStyle="mapbox://styles/mapbox/streets-v11"
+        ref={ref => ref && setMapboxMap(ref.getMap())}
+        onViewportChange={(viewport) => setViewport(viewport)}
+      >
         <div className='sidebarStyle'>
           <div>
             Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
           </div>
         </div>
-        <div className='map-container' ref={mapContainerRef} />
-      </div>
+        {
+          markersArray.map((marker, index) => {
+            return (
+              <CustomMarker
+                key={`marker - ${index} `}
+                longitude={marker.longitude}
+                latitude={marker.latitude}
+                index={index}
+              />
+            )
+          })
+        }
+      </ReactMapGL>
     </>
   );
 };

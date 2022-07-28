@@ -5,7 +5,7 @@ import { addEventsToItinerary } from '../actions/common';
 import { initializeMapPositions } from '../utils/common';
 import MapboxCanvas from '../components/MapboxCanvas';
 
-const MapContainerMapbox = ({ currentItineraryEventId, itineraryEvents }) => {
+const MapContainerMapbox = ({ currentItineraryEventId, itineraryEvents, searchPlace }) => {
 
   const [selectedMarkerId, setSelectedMarkerId] = useState(null);
   const [mapPositions, setMapPositions] = useState(null);
@@ -25,6 +25,7 @@ const MapContainerMapbox = ({ currentItineraryEventId, itineraryEvents }) => {
       id="map_canvas"
       positions={mapPositions}
       selectedMarkerId={selectedMarkerId}
+      searchPlace={searchPlace}
     >
     </MapboxCanvas>
   );
