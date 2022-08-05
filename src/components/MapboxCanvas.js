@@ -10,7 +10,6 @@ import {
   zoomToIncludeMarkers
 } from '../utils/mapboxAPIUtils';
 
-
 const { DEFAULT_MAP_DESTINATION } = CONSTANTS;
 
 mapboxgl.accessToken = MAPBOX_API_KEY;
@@ -33,9 +32,9 @@ const CustomMarker = ({ index, latitude, longitude }) => {
       key={`marker-${index}`}
       longitude={longitude}
       latitude={latitude}>
-      <div className="marker">
-        <span><b>{index + 1}</b></span>
-      </div>
+      <span className="pin">
+        <b>{index + 1}</b>
+      </span>
       <Pin size={20} />
     </Marker>
   )
