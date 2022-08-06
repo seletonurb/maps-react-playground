@@ -1,13 +1,16 @@
-# discovery-maps
+# maps-react-playground #
 A proof of concept for clients connecting to different maps tools and APIs.
 
 Overview:
-- A SPA with one screen containing a fixed left side nav and a map
-- Ability to see a itinerary in the past hour
-- [Not available] Ability to set geofences and check if an element is in/out of this geofence
+- A SPA with one screen containing a fixed left side navigation panel and a map
+- Use of packages that provides bindings between React and the main map libraries: Google Maps, Mapbox anf Leaflet
+- Ability to see a itinerary in a map with markers
+- [Not available] Ability to do operations with geofences
 - [Not available] Cost breakdown of each request made to different APIs
 
 ## Setup
+
+For all map libraries, an access token is needed to render components. The instructions to generate such tokens cna be found below.
 
 ### Google Maps
 1. Create project on GCP
@@ -16,15 +19,29 @@ Overview:
 
 Link for project with API key: (GCP Project)[https://console.cloud.google.com/home/dashboard?project=maps-test-309315]
 
+### MapBox
+
+_Note: Mapbox provides an API key used as an example in this project, so you don't need to generate an API key for small tests or to run this project._
+
+To use any of Mapbox's tools, APIs, or SDKs, you'll need a Mapbox JWT (access token)[https://docs.mapbox.com/help/glossary/access-token/].
+
+Follow these steps to do so:
+1. Create a Mapbox account.
+2. Once you signed in, to create the authorization token, visit the (Tokens page)[https://account.mapbox.com/access-tokens/]
+3. Finally, click on the Create a token button.
+
+More info on: (Mapbox access token)[https://docs.mapbox.com/help/getting-started/access-tokens/]
+
 ### Leaftlet
 
-### MapBox
+Leaflet is a free and does not require additional settings. It is based on the OpenStreetMaps technology.
 
 ## Environment variables
 
+Tokens can be configured as environment variables:
+
 `GOOGLE_MAPS_API_KEY`: Google Maps API key for Places, Directions and Map requests
 `MAPBOX_API_KEY`: Mapbox API key
-
 
 ## Getting started
 

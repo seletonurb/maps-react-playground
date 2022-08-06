@@ -1,24 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import {
-  MapContainer, TileLayer, Marker, Popup
-} from 'react-leaflet';
 import { addEventsToItinerary } from '../actions/common';
-import CONSTANTS from '../constants/constants';
+import LeaftletCanvas from '../components/LeafletCanvas';
+import { initializeMapPositions } from '../utils/common';
 
-const MapContainerLeaflet = ({ currentItineraryEventId, itineraryEvents }) => {
+const MapContainerLeaflet = ({ currentItineraryEventId, itineraryEvents, searchPlace }) => {
+  const [selectedMarkerId, setSelectedMarkerId] = useState(null);
+  const [mapPositions, setMapPositions] = useState(null);
+
+  useEffect(() => {
+    setSelectedMarkerId(currentItineraryEventId || null);
+  }, [currentItineraryEventId]);
+
+  useEffect(() => {
+    const mapPositions = initializeMapPositions(itineraryEvents);
+    setMapPositions(mapPositions);
+  }, [itineraryEvents]);
+
   return (
-        <MapContainer center={[CONSTANTS.DEFAULT_MAP_DESTINATION.CENTER[0], CONSTANTS.DEFAULT_MAP_DESTINATION.CENTER[1]]} zoom={CONSTANTS.DEFAULT_MAP_DESTINATION.ZOOM} scrollWheelZoom={false}>
-            <TileLayer
-                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-            <Marker position={[51.505, -0.09]}>
-                <Popup>
-                    A pretty CSS3 popup. <br /> Easily customizable.
-                </Popup>
-            </Marker>
-        </MapContainer>
+    <LeaftletCanvas
+      positions={mapPositions}
+      selectedMarkerId={selectedMarkerId}
+      searchPlace={searchPlace} />
   );
 };
 
