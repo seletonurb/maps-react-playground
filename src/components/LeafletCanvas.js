@@ -3,7 +3,7 @@ import {
   MapContainer, TileLayer, Marker, Popup, useMap
 } from 'react-leaflet';
 import CONSTANTS from '../constants/constants';
-import { removeMarker } from '../utils/leafletAPIUtils';
+import { removeMarker, zoomToIncludeMarkers } from '../utils/leafletAPIUtils';
 import 'leaflet/dist/leaflet.css';
 const { DEFAULT_MAP_DESTINATION } = CONSTANTS;
 
@@ -50,8 +50,9 @@ const MarkerLayer = ({ markersArray }) => {
         removeMarker(marker.id, map);
       }
     });
-
     setMarkers(markersArray)
+
+    zoomToIncludeMarkers(map, markersArray)
   }, [markersArray]);
 
   return markers.map((m, index) => (

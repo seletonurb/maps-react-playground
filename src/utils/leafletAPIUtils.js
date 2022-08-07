@@ -31,3 +31,21 @@ export const removeAllMarkers = (map) => {
   });
 }
 
+/* 
+ * Establish new map bounds to fit all markers passed as input parameters in the viewport.
+ * 
+ * @param {Object} map - Leaflet maps object
+ * @param {Array} markers - Leaflet markers array
+ * 
+*/
+export const zoomToIncludeMarkers = (map, markers = []) => {
+  if (markers.length === 0) {
+    return;
+  }
+
+  const markerGroup = markers.map(marker => L.marker([marker.latitude, marker.longitude]));
+  const group = new L.featureGroup(markerGroup);
+  map.fitBounds(group.getBounds());
+};
+
+
