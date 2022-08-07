@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {
-  MapContainer, TileLayer, Marker, Popup, useMap
+  MapContainer, TileLayer, useMap
 } from 'react-leaflet';
 import CONSTANTS from '../constants/constants';
 import { removeMarker, zoomToIncludeMarkers } from '../utils/leafletAPIUtils';
+import CustomMarkerLeaflet from './CustomMarkerLeaflet';
 import 'leaflet/dist/leaflet.css';
 const { DEFAULT_MAP_DESTINATION } = CONSTANTS;
 
@@ -56,9 +57,7 @@ const MarkerLayer = ({ markersArray }) => {
   }, [markersArray]);
 
   return markers.map((m, index) => (
-    <Marker key={index} position={[m.latitude, m.longitude]}>
-      <Popup>Index: {m.mapIndex}</Popup>
-    </Marker>
+    <CustomMarkerLeaflet key={index} marker={m} />
   ));
 }
 

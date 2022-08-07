@@ -1,3 +1,4 @@
+import L from 'leaflet';
 
 /* 
   * Remove a single marker from the map.

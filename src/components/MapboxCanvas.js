@@ -5,7 +5,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import '../sass/mapbox.scss';
 import ReactMapGL, { Marker } from 'react-map-gl';
 import { MAPBOX_API_KEY } from '../appConfiguration';
-import Pin from "./Pin";
+import SVGPin from "./SVGPin";
 import {
   zoomToIncludeMarkers
 } from '../utils/mapboxAPIUtils';
@@ -35,7 +35,7 @@ const CustomMarker = ({ index, latitude, longitude }) => {
       <span className="pin">
         <b>{index + 1}</b>
       </span>
-      <Pin size={20} />
+      <SVGPin size={20} />
     </Marker>
   )
 };
