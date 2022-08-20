@@ -1,53 +1,32 @@
-/** ****************************
- * Marker Shape Definition
- ****************************** */
-const SVG_BALLOON_SHAPE = 'M0-48c-9.8 0-17.7 7.8-17.7 17.4 0 15.5 17.7 30.6 17.7 30.6s17.7-15.4 17.7-30.6c0-9.6-7.9-17.4-17.7-17.4z';
-const SVG_CIRCLE_SHAPE = 'M 0,0   m -15, 0  a 15,15 0 1,0 30,0  a 15,15 0 1,0 -30,0';
-const SVG_DEFAULT_SHAPE = SVG_BALLOON_SHAPE;
-
-/**
- * Constructor, with class name
- */
-function MarkerShape() {
-  // Public properties, assigned to the instance ('this')
-}
-
-/**
- * Public methods, assigned to prototype
- */
-MarkerShape.prototype.getShape = function () {
-  return SVG_DEFAULT_SHAPE;
-};
-MarkerShape.prototype.getBalloonShape = function () {
-  return SVG_BALLOON_SHAPE;
-};
-MarkerShape.prototype.getCircleShape = function () {
-  return SVG_CIRCLE_SHAPE;
-};
+import MarkerShape from './MarkerShape';
 
 /** ****************************
  * Marker Definition
  ****************************** */
 
 const defaultMarkerProps = {
-  path: new MarkerShape().getBalloonShape(),
+  path: new MarkerShape().getPinShape(),
+  cursor: "pointer",
+  fill: '#FF0000',
   fillOpacity: 0.8,
   scale: 0.8,
+  strokeColor: '#8B0000',
   strokeWeight: 2,
-  fillColor: '#008DD2',
-  strokeColor: 'blue'
+  textColor: 'white',
+  transform: `translate(0px,0px)`,
 };
 
 /**
  * Constructor, with class name
  */
 function Marker() {
-  this.path = defaultMarkerProps.path;
-  this.fillOpacity = defaultMarkerProps.fillOpacity;
-  this.scale = defaultMarkerProps.scale;
-  this.strokeWeight = defaultMarkerProps.strokeWeight;
-  this.fillColor = defaultMarkerProps.fillColor;
-  this.strokeColor = defaultMarkerProps.strokeColor;
+  const { path, fillOpacity, scale, strokeWeight, fill, strokeColor } = defaultMarkerProps;
+  this.path = path;
+  this.fillOpacity = fillOpacity;
+  this.scale = scale;
+  this.strokeWeight = strokeWeight;
+  this.fillColor = fill;
+  this.strokeColor = strokeColor;
   // shiftLabelUp property is responsible for shifting a marker label from the origin to any wanted direction
   this.shiftLabel = true;
 }
@@ -56,8 +35,8 @@ function Marker() {
  * Public methods, assigned to prototype
  */
 Marker.prototype.setSelectedState = function () {
-  this.fillColor = '#FF0000';
-  this.strokeColor = 'red';
+  this.fillColor = '#008DD2';
+  this.strokeColor = 'blue';
 };
 Marker.prototype.setSearchState = function () {
   this.fillColor = '#0ECC15';
@@ -88,13 +67,13 @@ MarkerFactory.MARKER_TYPES = {
 
 MarkerFactory.init = function (maps) {
   if (customPin.shiftLabel) {
-    customPin.labelOrigin = new maps.Point(0, -25);
+    customPin.labelOrigin = new maps.Point(0, -15);
   }
   if (customSelectedPin.shiftLabel) {
-    customSelectedPin.labelOrigin = new maps.Point(0, -25);
+    customSelectedPin.labelOrigin = new maps.Point(0, -15);
   }
   if (searchPin.shiftLabel) {
-    searchPin.labelOrigin = new maps.Point(0, -25);
+    searchPin.labelOrigin = new maps.Point(0, -15);
   }
 };
 
@@ -104,7 +83,7 @@ MarkerFactory.buildMarkerMap = function (maps, map, latitude, longitude, textLab
 
   markerType = markerType || MarkerFactory.MARKER_TYPES.NORMAL;
   if (markerType.shiftLabel) {
-    markerType.labelOrigin = new maps.Point(0, -25);
+    markerType.labelOrigin = new maps.Point(11, 10);
   }
   marker = new maps.Marker({
     title: `Marker: ${latitude}, ${longitude}`,
@@ -114,8 +93,8 @@ MarkerFactory.buildMarkerMap = function (maps, map, latitude, longitude, textLab
   marker.setPosition(loc);
   marker.setLabel({
     color: 'white',
-    fontSize: '18px',
-    fontWeight: '600',
+    fontSize: '10px',
+    fontWeight: '400',
     text: (textLabel || '').toString()
   });
   marker.id = id;

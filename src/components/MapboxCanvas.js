@@ -3,9 +3,9 @@ import CONSTANTS from '../constants/constants';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import '../sass/mapbox.scss';
-import ReactMapGL, { Marker } from 'react-map-gl';
+import ReactMapGL from 'react-map-gl';
 import { MAPBOX_API_KEY } from '../appConfiguration';
-import SVGPin from "./SVGPin";
+import CustomMarkerMapbox from "./CustomMarkerMapbox";
 import {
   zoomToIncludeMarkers
 } from '../utils/mapboxAPIUtils';
@@ -24,21 +24,6 @@ const mapStyle = {
   width: '100%',
   height: '100%'
 }
-
-const CustomMarker = ({ index, latitude, longitude }) => {
-  return (
-
-    <Marker
-      key={`marker-${index}`}
-      longitude={longitude}
-      latitude={latitude}>
-      <span className="pin">
-        <b>{index + 1}</b>
-      </span>
-      <SVGPin size={20} />
-    </Marker>
-  )
-};
 
 const MapboxCanvas = ({
   positions, selectedMarkerId, searchPlace
@@ -141,7 +126,7 @@ const MapboxCanvas = ({
         {
           markersArray.map((marker, index) => {
             return (
-              <CustomMarker
+              <CustomMarkerMapbox
                 key={`marker - ${index} `}
                 longitude={marker.longitude}
                 latitude={marker.latitude}

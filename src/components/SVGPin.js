@@ -1,29 +1,31 @@
 import React, { PureComponent } from "react";
-import { ICON_PIN } from "../constants/svgPaths";
+import MarkerShape from '../services/MarkerShape';
+const pinMarker = new MarkerShape().getPinShape();
 
 const pinStyle = {
+    path: pinMarker,
     cursor: "pointer",
-    fill: "#d00",
-    stroke: "none"
+    fill: "#FF0000",
+    fillOpacity: 0.8,
+    scale: 0.8,
+    stroke: "#8B0000",
+    strokeWidth: "2",
+    textColor: "white",
+    transform: `translate(0px,0px)`
 };
 
 export default class SVGPin extends PureComponent {
     render() {
-        const { size = 20, onClick } = this.props;
+        const { size = 20, label, onClick } = this.props;
 
         return (
             <svg
                 height={size}
                 viewBox="0 0 24 24"
-                style={{
-                    cursor: "pointer",
-                    fill: "#d00",
-                    stroke: "none",
-                    transform: `translate(${-size / 2}px,${-size}px)`
-                }}
                 onClick={onClick}
             >
-                <path d={ICON_PIN} />
+                <path d={pinStyle.path} fill={pinStyle.fill} stroke={pinStyle.stroke} strokeWidth={pinStyle.strokeWidth} />
+                <text x="8" y="15" fill={pinStyle.textColor} >{label}</text>
             </svg>
         );
     }
