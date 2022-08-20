@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import CONSTANTS from '../constants/constants';
 import GoogleMapReact from 'google-map-react';
-import MarkerFactory from '../services/MarkerFactory';
+import GoogleMarkerFactory from '../services/GoogleMarkerFactory';
 import { GOOGLE_MAPS_API_KEY } from '../appConfiguration';
 import {
-  zoomToIncludeMarkers
+  zoomToIncludeMarkers,
+  clearMarkers
 } from '../utils/googleAPIUtils';
 import { generateTimestampId } from '../utils/common';
 
@@ -19,13 +20,13 @@ const GoogleMapCanvas = ({
 
   const addMarkerToMap = (maps, map, latitude, longitude, textLabel, markerId, markerType) => {
     const id = markerId || generateTimestampId(); // if id does not exist, generates a random marker id based on a timestamp
-    const marker = MarkerFactory.buildMarkerMap(maps, map, latitude, longitude, textLabel, id, markerType);
+    const marker = GoogleMarkerFactory.buildMarkerMap(maps, map, latitude, longitude, textLabel, id, markerType);
     return marker;
   };
 
   const addMarkersToMap = (maps, map, positions) => {
     const updatedMarkersArray = [...markersArray];
-    MarkerFactory.clearMarkers(updatedMarkersArray); // clear map markers if they exist
+    clearMarkers(updatedMarkersArray); // clear map markers if they exist
     (positions || []).forEach(function (position, index) {
       const {
         latitude, longitude, textLabel, id
@@ -61,13 +62,17 @@ const GoogleMapCanvas = ({
     // unselects current selection
     let markerIndex = markersArray.findIndex(marker => marker.id === selectedMarker.current);
     if (markerIndex !== -1) {
-      markersArray[markerIndex].setIcon(MarkerFactory.MARKER_TYPES.NORMAL);
+      const curentMarker = markersArray[markerIndex]
+      const markerIcon = GoogleMarkerFactory.getMarkerIcon(curentMarker.icon, GoogleMarkerFactory.MARKER_TYPES.NORMAL);
+      curentMarker.setIcon(markerIcon);
     }
 
     // selects new marker
     markerIndex = markersArray.findIndex(marker => marker.id === selectedMarkerId);
     if (markerIndex !== -1) {
-      markersArray[markerIndex].setIcon(MarkerFactory.MARKER_TYPES.SELECTED);
+      const curentMarker = markersArray[markerIndex]
+      const markerIcon = GoogleMarkerFactory.getMarkerIcon(curentMarker.icon, GoogleMarkerFactory.MARKER_TYPES.SELECTED);
+      curentMarker.setIcon(markerIcon);
     }
     selectedMarker.current = selectedMarkerId;
   }, [selectedMarkerId, markersArray]);
@@ -79,8 +84,6 @@ const GoogleMapCanvas = ({
     setMaps(maps);
     onMapsLoaded(maps); // initialize maps for reference outside this component
 
-    // initialize custom Pins once google api is loaded
-    MarkerFactory.init(maps);
   };
 
   const onMapsload = ({ map, maps }) => {

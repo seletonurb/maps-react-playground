@@ -1,15 +1,14 @@
 import { v4 as uuidv4 } from 'uuid';
-/** ******************************PLACES API********************************************* */
 
-/* Parses a place object from Google API into an obejct with the following properties:
-   {
-    id,
-    name,
-    latitude,
-    longitude,
-    address
-   };
-*/
+/* 
+  * PLACES API
+  * Parses a place object from Google API into an object with the following properties
+  * 
+  * @param {Object} place - object with id, name, latitude, longitude, address properties
+  * 
+  * @returns {Function} place - Parsed place object
+  *  
+  */
 export const parsePlace = place => {
   const parsedPlace = {
     id: uuidv4(),
@@ -23,6 +22,15 @@ export const parsePlace = place => {
   return parsedPlace;
 };
 
+/* 
+  * PLACES API
+  * Initialize HTML Element listener responsible for displaying Place API results
+  * 
+  * @param {Object} inputElement - HTML Element
+  * @param {Object} maps - Google Maps object
+  * @param {Function} callback - Callback function for post listener creation actions
+  *  
+  */
 export const initAutocompleteSearchPlacesBox = (inputElement, maps, callback) => {
   // Create the search box and link it to the UI element.
   const searchBox = new maps.places.SearchBox(inputElement);
@@ -51,11 +59,16 @@ export const initAutocompleteSearchPlacesBox = (inputElement, maps, callback) =>
   });
 };
 
-/** ****************************** END PLACES API********************************************* */
-
-/** ******************************MAPS API********************************************* */
-
-// Return map bounds based on list of places
+/* 
+  * MAPS API
+  * Return map bounds based on list of places
+  * 
+  * @param {Object} maps - Google Maps object
+  * @param {Array} markers - Array of Markers
+  * 
+  * @returns {Object} bounds - Google LatLngBounds object
+  * 
+  */
 const getMapBounds = (maps, markers) => {
   const bounds = new maps.LatLngBounds();
 
@@ -68,7 +81,15 @@ const getMapBounds = (maps, markers) => {
   return bounds;
 };
 
-// Re-center map when resizing the window
+/* 
+  * MAPS API
+  *  Re-center map when resizing the window
+  * 
+  * @param {Object} map - Google Map object
+  * @param {Object} maps - Google Maps object
+  * @param {Object} bounds - Google LatLngBounds object
+  * 
+  */
 const bindResizeListener = (map, maps, bounds) => {
   maps.event.addListenerOnce(map, 'idle', () => {
     maps.event.addDomListener(window, 'resize', () => {
@@ -77,6 +98,14 @@ const bindResizeListener = (map, maps, bounds) => {
   });
 };
 
+/* 
+  * MAPS API
+  * Adjusts zoom when there is just one marker on the map
+  * 
+  * @param {Array} markers - Array of Markers
+  * @param {Object} maps - Google Maps object
+  *  
+  */
 const setZoomForOneMarker = (markers, map) => {
   if (markers.length === 1) {
     let newZoom;
@@ -86,6 +115,15 @@ const setZoomForOneMarker = (markers, map) => {
   }
 };
 
+/* 
+  * MAPS API
+  * Establish new map bounds to fit all markers passed as input parameters in the viewport.
+  * 
+  * @param {Object} map - Google Map object
+  * @param {Object} maps - Google Maps object
+  * @param {Array} markers - Array of Markers 
+  * 
+  */
 export const zoomToIncludeMarkers = (maps, map, markers = []) => {
   if (markers.length === 0) {
     return;
@@ -100,4 +138,39 @@ export const zoomToIncludeMarkers = (maps, map, markers = []) => {
   // special zoom if only one marker
   setZoomForOneMarker(markers, map);
 };
-/** ******************************ENDS MAPS API********************************************* */
+
+/* 
+  * MAPS API
+  * Removes all markers from the map it is included.
+  * 
+  * @param {Array} markers - Array of Markers 
+  * 
+  */
+export const clearMarkers = (markers) => {
+  (markers || []).forEach(function (marker) {
+    marker.setMap(null);
+  });
+  markers.length = 0;
+};
+
+/* 
+  * MAPS API
+  * Removes all markers from the map it is included.
+  * 
+  * @param {Array} markers - Array of Markers 
+  * @param {String} markerIdToRemove - Marker id to remove from the array 
+  * 
+  */
+export const removeMarker = (markers, markerIdToRemove) => {
+  let markerIndex;
+  (markers || []).forEach(function (marker, index) {
+    if (markerIdToRemove === marker.id) {
+      marker.setMap(null);
+      markerIndex = index;
+    }
+  });
+
+  if (markerIndex !== undefined) {
+    markers.splice(markerIndex, 1);
+  }
+};
