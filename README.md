@@ -13,24 +13,23 @@ Overview:
 For all map libraries, an access token is needed to render components. The instructions to generate such tokens cna be found below.
 
 ### Google Maps
-1. Create project on GCP
+1. Create project on [GCP](https://cloud.google.com/resource-manager/docs/creating-managing-projects)
 2. Enable APIs: Directions API, Places API and 
 3. Enable Billing on the project
 
-Link for project with API key: (GCP Project)[https://console.cloud.google.com/home/dashboard?project=maps-test-309315]
 
 ### MapBox
 
 _Note: Mapbox provides an API key used as an example in this project, so you don't need to generate an API key for small tests or to run this project._
 
-To use any of Mapbox's tools, APIs, or SDKs, you'll need a Mapbox JWT (access token)[https://docs.mapbox.com/help/glossary/access-token/].
+To use any of Mapbox's tools, APIs, or SDKs, you'll need a Mapbox JWT [access token](https://docs.mapbox.com/help/glossary/access-token/).
 
 Follow these steps to do so:
 1. Create a Mapbox account.
-2. Once you signed in, to create the authorization token, visit the (Tokens page)[https://account.mapbox.com/access-tokens/]
+2. Once you signed in, to create the authorization token, visit the [Tokens page](https://account.mapbox.com/access-tokens/)
 3. Finally, click on the Create a token button.
 
-More info on: (Mapbox access token)[https://docs.mapbox.com/help/getting-started/access-tokens/]
+More info on: [Mapbox access token](https://docs.mapbox.com/help/getting-started/access-tokens/)
 
 ### Leaftlet
 
