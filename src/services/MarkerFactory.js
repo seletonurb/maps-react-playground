@@ -65,15 +65,20 @@ MarkerFactory.MARKER_TYPES = {
   SELECTED: customSelectedPin
 };
 
+const getShiftedLabelPoint = function (maps) {
+  return new maps.Point(11, 10)
+}
+
+
 MarkerFactory.init = function (maps) {
   if (customPin.shiftLabel) {
-    customPin.labelOrigin = new maps.Point(0, -15);
+    customPin.labelOrigin = getShiftedLabelPoint(maps);
   }
   if (customSelectedPin.shiftLabel) {
-    customSelectedPin.labelOrigin = new maps.Point(0, -15);
+    customSelectedPin.labelOrigin = getShiftedLabelPoint(maps);
   }
   if (searchPin.shiftLabel) {
-    searchPin.labelOrigin = new maps.Point(0, -15);
+    searchPin.labelOrigin = getShiftedLabelPoint(maps);
   }
 };
 
@@ -83,7 +88,7 @@ MarkerFactory.buildMarkerMap = function (maps, map, latitude, longitude, textLab
 
   markerType = markerType || MarkerFactory.MARKER_TYPES.NORMAL;
   if (markerType.shiftLabel) {
-    markerType.labelOrigin = new maps.Point(11, 10);
+    markerType.labelOrigin = getShiftedLabelPoint(maps);
   }
   marker = new maps.Marker({
     title: `Marker: ${latitude}, ${longitude}`,
