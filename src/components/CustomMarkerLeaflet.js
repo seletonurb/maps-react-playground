@@ -1,21 +1,12 @@
 import React from 'react';
 import {
-  Marker, Popup, Tooltip,
+  Marker, Popup,
 } from 'react-leaflet';
-import { ICON_PIN } from '../constants/svgPaths';
 import MarkerShape from '../services/MarkerShape';
+import MAP_CONSTANTS from '../constants/mapConstants';
 
-const pinStyle = {
-  path: new MarkerShape().getPinShape(),
-  cursor: "pointer",
-  fill: "#FF0000",
-  fillOpacity: 0.8,
-  scale: 0.8,
-  stroke: "#8B0000",
-  strokeWidth: "2",
-  textColor: "white",
-  transform: `translate(0px,0px)`
-};
+const markerShape = new MarkerShape().getPinShape()
+const { defaultMarkerStyle } = MAP_CONSTANTS
 
 const svgIcon = (label) => L.divIcon({
   html: `<svg
@@ -26,8 +17,8 @@ const svgIcon = (label) => L.divIcon({
           preserveAspectRatio="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <path d="${pinStyle.path}" fill="${pinStyle.fill}" stroke="${pinStyle.stroke}" stroke-width="${pinStyle.strokeWidth}"></path>
-          <text x="8" y="15" fill="${pinStyle.textColor}">${label}</text>
+          <path d="${markerShape}" fill="${defaultMarkerStyle.fill}" stroke="${defaultMarkerStyle.stroke}" stroke-width="${defaultMarkerStyle.strokeWidth}"></path>
+          <text x="8" y="15" fill="${defaultMarkerStyle.textColor}">${label}</text>
         </svg>`,
   className: "",
   iconSize: [40, 40],

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import CONSTANTS from '../constants/constants';
+import MAP_CONSTANTS from '../constants/mapConstants';
 import GoogleMapReact from 'google-map-react';
 import GoogleMarkerFactory from '../services/GoogleMarkerFactory';
 import { GOOGLE_MAPS_API_KEY } from '../appConfiguration';
@@ -10,6 +11,7 @@ import {
 import { generateTimestampId } from '../utils/common';
 
 const { DEFAULT_MAP_DESTINATION } = CONSTANTS;
+const { MARKER_TYPES } = MAP_CONSTANTS
 
 const GoogleMapCanvas = ({
   children, positions, selectedMarkerId, onMapsLoaded, props
@@ -20,7 +22,7 @@ const GoogleMapCanvas = ({
 
   const addMarkerToMap = (maps, map, latitude, longitude, textLabel, markerId, markerType) => {
     const id = markerId || generateTimestampId(); // if id does not exist, generates a random marker id based on a timestamp
-    const marker = GoogleMarkerFactory.buildMarkerMap(maps, map, latitude, longitude, textLabel, id, markerType);
+    const marker = GoogleMarkerFactory.buildMapMarker(maps, map, latitude, longitude, textLabel, id, markerType);
     return marker;
   };
 
@@ -63,7 +65,7 @@ const GoogleMapCanvas = ({
     let markerIndex = markersArray.findIndex(marker => marker.id === selectedMarker.current);
     if (markerIndex !== -1) {
       const curentMarker = markersArray[markerIndex]
-      const markerIcon = GoogleMarkerFactory.getMarkerIcon(curentMarker.icon, GoogleMarkerFactory.MARKER_TYPES.NORMAL);
+      const markerIcon = GoogleMarkerFactory.getMarkerIcon(curentMarker.icon, MARKER_TYPES.NORMAL);
       curentMarker.setIcon(markerIcon);
     }
 
@@ -71,7 +73,7 @@ const GoogleMapCanvas = ({
     markerIndex = markersArray.findIndex(marker => marker.id === selectedMarkerId);
     if (markerIndex !== -1) {
       const curentMarker = markersArray[markerIndex]
-      const markerIcon = GoogleMarkerFactory.getMarkerIcon(curentMarker.icon, GoogleMarkerFactory.MARKER_TYPES.SELECTED);
+      const markerIcon = GoogleMarkerFactory.getMarkerIcon(curentMarker.icon, MARKER_TYPES.SELECTED);
       curentMarker.setIcon(markerIcon);
     }
     selectedMarker.current = selectedMarkerId;

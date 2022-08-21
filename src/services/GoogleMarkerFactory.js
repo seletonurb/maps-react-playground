@@ -1,24 +1,15 @@
+import MAP_CONSTANTS from '../constants/mapConstants';
 import MarkerShape from './MarkerShape';
-
-const defaultMarkerProps = {
-  path: new MarkerShape().getPinShape(),
-  cursor: "pointer",
-  fill: '#FF0000',
-  fillOpacity: 0.8,
-  scale: 0.8,
-  strokeColor: '#8B0000',
-  strokeWeight: 2,
-  textColor: 'white',
-  transform: `translate(0px,0px)`,
-};
+const { MARKER_TYPES, defaultMarkerStyle } = MAP_CONSTANTS
+const markerShape = new MarkerShape().getPinShape()
 
 /**
  * GoogleMarkerIcon Constructor
  */
-function GoogleMarkerIcon(markerIcon = {}) {
-  const { path: defaultPath, fillOpacity: defaultFillOpacity, scale: defaultScale, strokeWeight: defaultStrokeWeight, fill: defaultFill, strokeColor: defaultStrokeColor } = defaultMarkerProps;
-  const { path = defaultPath, fillOpacity = defaultFillOpacity, scale = defaultScale, strokeWeight = defaultStrokeWeight, fill = defaultFill, strokeColor = defaultStrokeColor } = markerIcon;
-  this.path = path;
+function GoogleMarkerIcon(markerStyle = {}) {
+  const { fillOpacity: defaultFillOpacity, scale: defaultScale, strokeWeight: defaultStrokeWeight, fill: defaultFill, strokeColor: defaultStrokeColor } = defaultMarkerStyle;
+  const { path, fillOpacity = defaultFillOpacity, scale = defaultScale, strokeWeight = defaultStrokeWeight, fill = defaultFill, strokeColor = defaultStrokeColor } = markerStyle;
+  this.path = path || markerShape;
   this.fillOpacity = fillOpacity;
   this.scale = scale;
   this.strokeWeight = strokeWeight;
@@ -33,38 +24,43 @@ function GoogleMarkerIcon(markerIcon = {}) {
  */
 const GoogleMarkerFactory = {};
 
-GoogleMarkerFactory.MARKER_TYPES = {
-  NORMAL: 'NORMAL_MARKER',
-  SEARCH: 'SEARCH_MARKER',
-  SELECTED: 'SELECTED_MARKER'
-};
+/* 
+  * Factory initialization function
+  * 
+  */
+GoogleMarkerFactory.init = function () { };
 
-GoogleMarkerIcon.prototype.getIcon = function (markerIcon, markerType) {
+const getIcon = (markerIcon, markerType) => {
   if (!markerIcon) {
-    markerIcon = new GoogleMarkerIcon();;
+    markerIcon = new GoogleMarkerIcon();
   }
-  if (markerType === GoogleMarkerFactory.MARKER_TYPES.NORMAL) {
+  if (markerType === MARKER_TYPES.NORMAL) {
     return { ...markerIcon, fillColor: '#8B0000', strokeColor: 'red' };
   }
-  if (markerType === GoogleMarkerFactory.MARKER_TYPES.SEARCH) {
+  if (markerType === MARKER_TYPES.SEARCH) {
     return { ...markerIcon, fillColor: '#0ECC15', strokeColor: 'green' };
   }
-  if (markerType === GoogleMarkerFactory.MARKER_TYPES.SELECTED) {
+  if (markerType === MARKER_TYPES.SELECTED) {
     return { ...markerIcon, fillColor: '#008DD2', strokeColor: 'blue' };
   }
 };
 
+/* 
+  * Returns an icon object according to the type input parameter.
+  * 
+  * @param {Object} markerIcon - Google Maps marker icon object
+  * @param {String} markerType - (Optional) the marker type
+  * 
+  * @returns {Object} icon - a Google marker icon object
+  */
 GoogleMarkerFactory.getMarkerIcon = (markerIcon, markerType) => {
-  const mergedPin = new GoogleMarkerIcon(markerIcon);
-  const marker = mergedPin.getIcon(markerIcon, markerType);
-  return marker;
+  const icon = getIcon(markerIcon, markerType);
+  return icon;
 };
 
-const getShiftedLabelPoint = function (maps) {
+const getShiftedLabelPoint = (maps) => {
   return new maps.Point(11, 10)
 }
-
-GoogleMarkerFactory.init = function () { };
 
 /* 
   * Build a Google Marker based on input parameters and add to a Google map.
@@ -77,13 +73,13 @@ GoogleMarkerFactory.init = function () { };
   * @param {String} id - the marker id
   * @param {String} markerType - (Optional) the marker type
   * 
+  * @returns {Object} marker - a Google marker object
   */
-GoogleMarkerFactory.buildMarkerMap = function (maps, map, latitude, longitude, textLabel, id, markerType) {
+GoogleMarkerFactory.buildMapMarker = function (maps, map, latitude, longitude, textLabel, id, markerType) {
   let marker;
   let loc;
-  const mType = !markerType ? GoogleMarkerFactory.MARKER_TYPES.NORMAL : markerType;
-  const mIcon = new GoogleMarkerIcon();
-  const markerIcon = mIcon.getIcon(mIcon, mType);
+  const mType = !markerType ? MARKER_TYPES.NORMAL : markerType;
+  const markerIcon = getIcon(null, mType);
 
   if (markerIcon.shiftLabel) {
     markerIcon.labelOrigin = getShiftedLabelPoint(maps);
