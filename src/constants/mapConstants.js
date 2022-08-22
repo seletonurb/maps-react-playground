@@ -10,8 +10,8 @@ const MAP_CONSTANTS = {
         fill: '#FF0000',
         fillOpacity: 0.8,
         scale: 0.8,
-        strokeColor: '#8B0000',
-        strokeWeight: 2,
+        stroke: '#8B0000',
+        strokeWidth: 2,
         textColor: 'white',
         transform: 'translate(0px,0px)',
     }

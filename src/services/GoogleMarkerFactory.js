@@ -1,20 +1,21 @@
 import MAP_CONSTANTS from '../constants/mapConstants';
 import MarkerShape from './MarkerShape';
+import MarkerStyle from './MarkerStyle';
 const { MARKER_TYPES, defaultMarkerStyle } = MAP_CONSTANTS
 const markerShape = new MarkerShape().getPinShape()
 
 /**
  * GoogleMarkerIcon Constructor
  */
-function GoogleMarkerIcon(markerStyle = {}) {
-  const { fillOpacity: defaultFillOpacity, scale: defaultScale, strokeWeight: defaultStrokeWeight, fill: defaultFill, strokeColor: defaultStrokeColor } = defaultMarkerStyle;
-  const { path, fillOpacity = defaultFillOpacity, scale = defaultScale, strokeWeight = defaultStrokeWeight, fill = defaultFill, strokeColor = defaultStrokeColor } = markerStyle;
-  this.path = path || markerShape;
+function GoogleMarkerIcon(markerType) {
+  const markerStyle = new MarkerStyle(markerType);
+  const { fillOpacity, scale, strokeWidth, fill, stroke } = markerStyle;
+  this.path = markerShape;
   this.fillOpacity = fillOpacity;
   this.scale = scale;
-  this.strokeWeight = strokeWeight;
+  this.strokeWeight = strokeWidth;
   this.fillColor = fill;
-  this.strokeColor = strokeColor;
+  this.strokeColor = stroke;
   // shiftLabelUp property is responsible for shifting a marker label from the origin to any wanted direction
   this.shiftLabel = true;
 }
@@ -30,19 +31,11 @@ const GoogleMarkerFactory = {};
   */
 GoogleMarkerFactory.init = function () { };
 
-const getIcon = (markerIcon, markerType) => {
-  if (!markerIcon) {
-    markerIcon = new GoogleMarkerIcon();
-  }
-  if (markerType === MARKER_TYPES.NORMAL) {
-    return { ...markerIcon, fillColor: '#8B0000', strokeColor: 'red' };
-  }
-  if (markerType === MARKER_TYPES.SEARCH) {
-    return { ...markerIcon, fillColor: '#0ECC15', strokeColor: 'green' };
-  }
-  if (markerType === MARKER_TYPES.SELECTED) {
-    return { ...markerIcon, fillColor: '#008DD2', strokeColor: 'blue' };
-  }
+const getIcon = (markerIcon = {}, markerType) => {
+  const gMarkerIcon = new GoogleMarkerIcon(markerType);
+  return { ...markerIcon, ...gMarkerIcon };
+
+
 };
 
 /* 
