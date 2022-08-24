@@ -41,7 +41,7 @@ const MapboxCanvas = ({
     if (!mapboxMap) {
       return
     }
-    console.log(`Map initialized`)
+    console.log(`Mapbox map initialized`)
 
     // Add navigation control (the +/- zoom buttons)
     mapboxMap.addControl(new mapboxgl.NavigationControl(), 'top-right');
@@ -60,11 +60,12 @@ const MapboxCanvas = ({
     console.log(`Viewport changed`)
   }, [viewport]);
 
-  const addMarkerToMap = (latitude, longitude, markerId) => {
+  const addMarkerToMap = (markerId, latitude, longitude) => {
     const marker = {
+      id: markerId,
       latitude,
       longitude,
-      markerId
+      isSelected: false,
     }
     const updatedMarkersArray = [...markersArray, marker];
     setMarkersArray(updatedMarkersArray);
@@ -95,7 +96,8 @@ const MapboxCanvas = ({
     if (!searchPlace) {
       return
     }
-    addMarkerToMap(searchPlace);
+    const { id, latitude, longitude } = searchPlace
+    addMarkerToMap(id, latitude, longitude);
   }, [searchPlace]);
 
   const selectedMarker = useRef(null);
@@ -104,9 +106,18 @@ const MapboxCanvas = ({
     if (selectedMarker.current === selectedMarkerId) {
       return;
     }
-    console.log(`New selected id: ${selectedMarkerId} `);
 
-  }, [selectedMarkerId, markersArray]);
+    const updatedMarkers = markersArray.map(marker => {
+      const updatedMarker = { ...marker }
+      updatedMarker.isSelected = updatedMarker.id === selectedMarkerId ? true : false;
+      return updatedMarker
+    })
+
+    // updates selected marker reference
+    selectedMarker.current = selectedMarkerId;
+    // updates marrkers array
+    setMarkersArray(updatedMarkers)
+  }, [selectedMarkerId, positions]);
 
   return (
     <>
@@ -130,6 +141,7 @@ const MapboxCanvas = ({
                 key={`marker - ${index} `}
                 longitude={marker.longitude}
                 latitude={marker.latitude}
+                isSelected={marker.isSelected}
                 index={index}
               />
             )

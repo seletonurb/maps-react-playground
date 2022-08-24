@@ -1,7 +1,7 @@
 import MAP_CONSTANTS from '../constants/mapConstants';
 import MarkerShape from './MarkerShape';
 import MarkerStyle from './MarkerStyle';
-const { MARKER_TYPES, defaultMarkerStyle } = MAP_CONSTANTS
+const { MARKER_TYPES } = MAP_CONSTANTS
 const markerShape = new MarkerShape().getPinShape()
 
 /**

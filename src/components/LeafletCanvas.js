@@ -73,11 +73,12 @@ const LeaftletCanvas = ({
     setMarkersArray(positions);
   }, [positions]);
 
-  const addMarkerToMap = (latitude, longitude, markerId) => {
+  const addMarkerToMap = (markerId, latitude, longitude) => {
     const marker = {
+      id: markerId,
       latitude,
       longitude,
-      markerId
+      isSelected: false,
     }
     const updatedMarkersArray = [...markersArray, marker];
     setMarkersArray(updatedMarkersArray);
@@ -87,7 +88,8 @@ const LeaftletCanvas = ({
     if (!searchPlace) {
       return
     }
-    addMarkerToMap(searchPlace);
+    const { id, latitude, longitude } = searchPlace
+    addMarkerToMap(id, latitude, longitude);
   }, [searchPlace]);
 
   const selectedMarker = useRef(null);
@@ -96,14 +98,23 @@ const LeaftletCanvas = ({
     if (selectedMarker.current === selectedMarkerId) {
       return;
     }
-    console.log(`New selected id: ${selectedMarkerId} `);
 
-  }, [selectedMarkerId, markersArray]);
+    const updatedMarkers = markersArray.map(marker => {
+      const updatedMarker = { ...marker }
+      updatedMarker.isSelected = updatedMarker.id === selectedMarkerId ? true : false;
+      return updatedMarker
+    })
+
+    // updates selected marker reference
+    selectedMarker.current = selectedMarkerId;
+    // updates marrkers array
+    setMarkersArray(updatedMarkers)
+  }, [selectedMarkerId, positions]);
 
   return (
     <>
       <MapContainer
-        whenReady={() => console.log('map ready')}
+        whenReady={() => console.log('Leaflet map ready')}
         id="leaflet-map" style={mapStyle}
         center={[defaultViewport.latitude, defaultViewport.longitude]} zoom={defaultViewport.zoom}
         scrollWheelZoom={false}

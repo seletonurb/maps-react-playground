@@ -4,11 +4,12 @@ import {
 } from 'react-leaflet';
 import MarkerShape from '../services/MarkerShape';
 import MAP_CONSTANTS from '../constants/mapConstants';
+import MarkerStyle from '../services/MarkerStyle';
 
 const markerShape = new MarkerShape().getPinShape()
-const { defaultMarkerStyle } = MAP_CONSTANTS
+const { MARKER_TYPES } = MAP_CONSTANTS
 
-const svgIcon = (label) => L.divIcon({
+const svgIcon = (label, markerStyle) => L.divIcon({
   html: `<svg
           width="80"
           height="80"
@@ -17,8 +18,8 @@ const svgIcon = (label) => L.divIcon({
           preserveAspectRatio="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <path d="${markerShape}" fill="${defaultMarkerStyle.fill}" stroke="${defaultMarkerStyle.stroke}" stroke-width="${defaultMarkerStyle.strokeWidth}"></path>
-          <text x="8" y="15" fill="${defaultMarkerStyle.textColor}">${label}</text>
+          <path d="${markerShape}" fill="${markerStyle.fill}" stroke="${markerStyle.stroke}" stroke-width="${markerStyle.strokeWidth}"></path>
+          <text x="8" y="15" fill="${markerStyle.textColor}">${label}</text>
         </svg>`,
   className: "",
   iconSize: [40, 40],
@@ -27,9 +28,11 @@ const svgIcon = (label) => L.divIcon({
 
 const CustomMarkerLeaflet = ({ marker }) => {
   console.log(marker)
+  const { latitude, longitude, mapIndex, isSelected } = marker
+  const markerStyle = isSelected ? new MarkerStyle(MARKER_TYPES.SELECTED) : new MarkerStyle(MARKER_TYPES.NORMAL)
   return (
-    <Marker position={[marker.latitude, marker.longitude]} icon={svgIcon(`${marker.mapIndex}`)}>
-      <Popup direction='top' >Index: {marker.mapIndex}</Popup>
+    <Marker position={[latitude, longitude]} icon={svgIcon(`${mapIndex}`, markerStyle)}>
+      <Popup direction='top' >Index: {mapIndex}</Popup>
     </Marker>
   );
 }
