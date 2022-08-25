@@ -1,12 +1,16 @@
 # maps-react-playground #
-A proof of concept for clients connecting to different maps tools and APIs.
+
+A React/Redux application that integrates to the main map providers.
+This is an example on how we can display map elements for different map provider from agnostic event objects that contains the corrsponding map coordinates.
 
 Overview:
 - A SPA with one screen containing a fixed left side navigation panel and a map
 - Use of packages that provides bindings between React and the main map libraries: Google Maps, Mapbox anf Leaflet
 - Ability to see a itinerary in a map with markers
-- [Not available] Ability to do operations with geofences
-- [Not available] Cost breakdown of each request made to different APIs
+
+Future work:
+- Ability to do operations with geofences
+- Cost breakdown of each request made to different APIs
 
 ## Setup
 

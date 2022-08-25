@@ -20,18 +20,18 @@ const ImportOptions = ({ onImportItineraryEventsWithOptions }) => {
   }
 
   return (
-    <div className="">
+    <div>
       <Dropdown>
         <Dropdown.Toggle id="dropdown-custom-components" drop="left">
-          Import
+          Import Samples
         </Dropdown.Toggle>
         <Dropdown.Menu>
-          <Dropdown.Item eventKey="2" onClick={(ev) => importData('events_paris')}>
+          <Dropdown.Item eventKey="1" onClick={(ev) => importData('events_paris')}>
             Events - Paris
-            </Dropdown.Item>
+          </Dropdown.Item>
           <Dropdown.Item eventKey="2" onClick={(ev) => importData('events_london')}>
             Events - London
-            </Dropdown.Item>
+          </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
     </div>

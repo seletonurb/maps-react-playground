@@ -363,7 +363,17 @@ input:checked+.slider:before {
   color: #ffffff;
 }
 
+.nav-logo {
+  height: 40px;
+  padding: 5px;
+  margin: 0 15px 0 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 
+  &.selected {
+    background-color: #ddd;
+  }
+}
 
 
 ul.list-inline {
@@ -449,9 +459,8 @@ ul.list-inline {
 }
 
 .btn.btn-primary {
-  &.spaced {
-    margin: 3px;
-  }
+  padding: 5px 8px;
+  margin-right: 10px;
 }
 
 .btn-toggle {
@@ -465,6 +474,10 @@ ul.list-inline {
 .btn-toggle.focus,
 .btn-toggle:focus {
   background-color: #ffffff;
+}
+
+.dropdown-toggle {
+  padding: 4px 8px;
 }
 
 body,

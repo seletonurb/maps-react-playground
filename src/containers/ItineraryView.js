@@ -77,14 +77,10 @@ const ItineraryView = ({
 
                 <div className="col-12 days-links small text-center">
                     <div className="row padding-10">
-                        <div className="col-6">
-                            <ImportOptions onImportItineraryEventsWithOptions={onImportItineraryEventsWithOptions} />
-                        </div>
-                        <div className="col-6">
-                            <button className="btn btn-primary btn-sm spaced" onClick={onResetItineraryEvent}>
-                                Reset All
-                            </button>
-                        </div>
+                        <ImportOptions onImportItineraryEventsWithOptions={onImportItineraryEventsWithOptions} />
+                        <button className="btn btn-primary " onClick={onResetItineraryEvent}>
+                            Reset All
+                        </button>
                     </div>
                 </div>
             </div>

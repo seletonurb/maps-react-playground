@@ -9,6 +9,7 @@
     },
     {
         "_id": "17a63357-8ec3-49c7-8dde-d117667a8c5a",
+        "timestampStart": 37800000,
         "name": "Eiffel Tower",
         "latitude": 48.8560934,
         "longitude": 2.2930458,
@@ -16,6 +17,7 @@
     },
     {
         "_id": "95e5f94d-bd54-483e-a776-9b6e170a0917",
+        "timestampStart": 41400000,
         "name": "Montmartre",
         "latitude": 48.8867148,
         "longitude": 2.3388895,
@@ -23,6 +25,7 @@
     },
     {
         "_id": "9aad74db-30db-41ba-a7b3-a843daa8a7b4",
+        "timestampStart": 45000000,
         "name": "Bastille",
         "latitude": 48.8513077,
         "longitude": 2.3761586,
@@ -30,6 +33,7 @@
     },
     {
         "_id": "284e2fe0-0d9f-44ec-bfd7-2b729cb55ee2",
+        "timestampStart": 48600000,
         "name": "Luxembourg Gardens",
         "latitude": 48.8462217,
         "longitude": 2.3371605,
@@ -37,9 +41,18 @@
     },
     {
         "_id": "c97a6301-1bcd-4cdc-98f6-7c507d3cc106",
+        "timestampStart": 52200000,
         "name": "Louvre Museum",
         "latitude": 48.8606111,
         "longitude": 2.337644,
         "address": "Rue de Rivoli, 75001 Paris, France"
+    },
+    {
+        "_id": "d97a6301-1bcd-4cdc-98f6-7c507d3cc106",
+        "timestampStart": 55800000,
+        "name": "Opera Garnier",
+        "latitude": 48.8720,
+        "longitude": 2.3316,
+        "address": "Pl. de l'Opéra, 75009 Paris, France"
     }
 ]
