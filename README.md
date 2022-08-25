@@ -1,7 +1,10 @@
 # maps-react-playground #
 
 A React/Redux application that integrates to the main map providers.
-This is an example on how we can display map elements for different map provider from agnostic event objects that contains the corrsponding map coordinates.
+
+You can use this app as an example on how to integrate your application that relies on objects that contain coordinates with different map libraries (Google Maps, Leaflet and Mapbox).
+
+![React maps playground](docs/react-maps-playground.gif)
 
 Overview:
 - A SPA with one screen containing a fixed left side navigation panel and a map
